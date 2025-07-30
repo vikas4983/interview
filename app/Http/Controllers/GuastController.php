@@ -17,7 +17,7 @@ class GuastController extends Controller
 
     public function guastNotes($uuid)
     {
-        $data = QuestionAnswer::where('uuid', $uuid)->paginate(5);
+        $data = QuestionAnswer::with('likes')->where('uuid', $uuid)->paginate(5);
         return view('guast', compact('data'));
     }
     public function guastCourse($language)

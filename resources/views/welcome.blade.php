@@ -13,7 +13,7 @@
                                     $id = $data->uuid;
 
                                 @endphp
-                                <h1>{{ $data->question }} {{ $data->id }}</h1>
+                                <h1>{{ $data->question }}</h1>
                                 <p class="card-text mb-6">{{ Str::limit($data->answer, 100) }}
 
                                     <a href="{{ route('guast.notes', $id) }}" class="btn-sm  btn-outline-info">Read
