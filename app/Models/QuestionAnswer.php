@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class QuestionAnswer extends Model
 {
-    protected $fillable  = ['question', 'uuid', 'answer', 'quote', 'code_block', 'heading', 'subject', 'language', 'status','like','dislike','ip','action'];
+    protected $fillable  = ['question', 'uuid', 'answer', 'quote', 'code_block', 'heading', 'subject', 'language', 'status','like','dislike'];
 
     public function scopeGetAll($query)
     {

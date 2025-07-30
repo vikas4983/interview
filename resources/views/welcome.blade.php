@@ -13,7 +13,7 @@
                                     $id = $data->uuid;
 
                                 @endphp
-                                <h1>{{ $data->question }}</h1>
+                                <h1>{{ $data->question }} {{$data->id}}</h1>
                                 <p class="card-text mb-6">{{ Str::limit($data->answer, 100) }}
 
                                     <a href="{{ route('guast.notes', $id) }}" class="btn-sm  btn-outline-info">Read
@@ -29,10 +29,12 @@
                                                     class="mdi mdi-thumb-up mr-5" title="cancel like"
                                                     style="color: green"></i></a></span>
                                     @elseif ($item->action == 'dislike' && $item->ip == request()->ip())
-                                        <span>{{ $data->dislike ? $data->dislike : '' }} <a href="{{ route('like', $data->uuid) }}"><i
+                                   
+                                        <span>{{ $data->dislike ? $data->dislike : ''  }} <a href="{{ route('dislike', $data->uuid) }}"><i
                                                     class="mdi mdi-thumb-down mr-5" title="cancel dislike"
                                                     style="color: rgb(225, 11, 11)"></i></a></span>
                                     @elseif (!$data->likes->contains('ip', request()->ip()))
+                                   
                                         <span>{{ $data->like ? $data->like : '' }} <a href="{{ route('like', $data->uuid) }}"><i
                                                     class="mdi mdi-thumb-up mr-5" title="Like"
                                                     style="color: green"></i></a></span>
