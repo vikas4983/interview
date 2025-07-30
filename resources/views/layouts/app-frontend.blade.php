@@ -135,14 +135,24 @@
             <!-- Header -->
             <header class="main-header" id="header">
                 <nav class="navbar navbar-expand-lg navbar-light" id="navbar">
-                    <!-- Sidebar toggle button -->
                     <button id="sidebar-toggler" class="sidebar-toggle">
                         <span class="sr-only">Toggle navigation</span>
                     </button>
                     @php
                         $heading = request()->segment(2);
                     @endphp
-                    <span class="page-title">{{  $heading  ?? 'Home'}}</span>
+                    <span class="page-title">{{ $heading ?? 'Home' }}</span>
+                    <div class="navbar-right ">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown user-menu">
+                                <button class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                    <img src="{{ asset('assets/images/logo.png') }}"
+                                        class="user-image rounded-circle" alt="User Image" />
+                                    <span class="d-none d-lg-inline-block">{{ Auth::user()->name ?? '' }}</span>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                 </nav>
 
 
