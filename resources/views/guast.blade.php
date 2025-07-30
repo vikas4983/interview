@@ -18,27 +18,27 @@
                     @if (isset($item) && isset($item->likes) && $item->likes->count() > 0)
                         @foreach ($item->likes as $like)
                             @if ($like->ip == request()->ip() && $like->action == 'like')
-                                <span>{{ $item->like ? $item->like : '' }} <a href="{{ route('like', $item->uuid) }}"><i
+                                <span>{{ $item->like !=0 ? $item->like : '' }} <a href="{{ route('like', $item->uuid) }}"><i
                                             class="mdi mdi-thumb-up mr-5" title="Cancel like"
                                             style="color: green"></i></a></span>
                             @elseif ($like->action == 'dislike' && $like->ip == request()->ip())
-                                <span>{{ $item->dislike ? $item->dislike : '' }} <a
+                                <span>{{ $item->dislike !=0 ? $item->dislike : '' }} <a
                                         href="{{ route('dislike', $item->uuid) }}"><i class="mdi mdi-thumb-down mr-5"
                                             title="Cancel dislike" style="color: rgb(255, 0, 0)"></i></a></span>
                             @elseif(!$item->likes->contains('ip', request()->ip()))
-                                <span>{{ $item->like ? $item->like : '' }} <a href="{{ route('like', $item->uuid) }}"><i
+                                <span>{{ $item->like !=0 ? $item->like : '' }} <a href="{{ route('like', $item->uuid) }}"><i
                                             class="mdi mdi-thumb-up mr-5" title="Like"
                                             style="color: green"></i></a></span>
-                                <span>{{ $like->dislike ? $item->dislike : '' }} <a
+                                <span>{{ $like->dislike !=0 ? $item->dislike : '' }} <a
                                         href="{{ route('dislike', $item->uuid) }}"><i class="mdi mdi-thumb-down mr-5"
                                             title="Dislike" style="color: rgb(225, 11, 11)"></i></a></span>
                             @endif
                         @endforeach
                     @else
-                     <span>{{ $item->like ? '0' : '' }} <a href="{{ route('like', $item->uuid) }}"><i
+                     <span>{{ $item->like !=0 ? $item->like : '' }} <a href="{{ route('like', $item->uuid) }}"><i
                                             class="mdi mdi-thumb-up mr-5" title="Like"
                                             style="color: green"></i></a></span>
-                                <span>{{ $item->dislike ? '0' : '' }} <a href="{{ route('dislike', $item->uuid) }}"><i
+                                <span>{{ $item->dislike !=0 ? $item->dislike : '' }} <a href="{{ route('dislike', $item->uuid) }}"><i
                                             class="mdi mdi-thumb-down mr-5" title="Dislike"
                                             style="color: rgb(225, 11, 11)"></i></a></span>
                     @endif
