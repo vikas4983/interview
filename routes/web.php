@@ -7,10 +7,10 @@ use App\Http\Controllers\QuestionAnswerController;
 use App\Models\QuestionAnswer;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    $iqa = QuestionAnswer::getAll()->latest('id', 'DESC')->paginate(6);
-    return view('welcome', compact('iqa'));
-})->name('/');
+// Route::get('/', function () {
+//   
+//     return view('welcome');
+// })->name('/');
 
 Route::middleware([
     'auth:sanctum',
@@ -24,8 +24,11 @@ Route::middleware([
 });
 
 // Frontend
+Route::get('/', [GuastController::class, 'home'])->name('/');
 Route::get('guast-notes/{uuid}', [GuastController::class, 'guastNotes'])->name('guast.notes');
 Route::get('guast-course/{uuid}', [GuastController::class, 'guastCourse'])->name('guast.course');
+Route::get('like/{uuid}', [GuastController::class, 'like'])->name('like');
+Route::get('dislike/{uuid}', [GuastController::class, 'dislike'])->name('dislike');
 
 
 

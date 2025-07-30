@@ -1,6 +1,7 @@
 @extends('layouts.app-frontend')
 @section('title', 'Gaust Notes')
 @section('content')
+@include('alerts.alert')
     @foreach ($data as $item)
         <div class="col-xl-12">
             <div class="card mb-3">
@@ -12,7 +13,22 @@
                         </div>
                     </div>
                 </div>
+                <div>
+                    @if (!empty($item) && $item->ip == request()->ip() && $item->action == 'like')
+                        <span>1 <a href="{{ route('like', $item->uuid) }}"><i class="mdi mdi-thumb-up mr-5"
+                                    style="color: green" title="You liked"></i></a></span>
+                    @elseif(!empty($item) && $item->ip == request()->ip() && $item->action == 'dislike')
+                        <span>2 <a href="{{ route('dislike', $item->uuid) }}"><i class="mdi mdi-thumb-down"
+                                    style="color: red"></i></a> </span>
+                    @else
+                        <span>1 <a href="{{ route('like', $item->uuid) }}"><i class="mdi mdi-thumb-up mr-5"
+                                    style="color: green"></i></a></span>
+                        <span>2 <a href="{{ route('dislike', $item->uuid) }}"><i class="mdi mdi-thumb-down"
+                                    style="color: red"></i></a> </span>
+                    @endif
+                </div>
             </div>
+
         </div>
     @endforeach
     <div class="flex justify-center mt-4">

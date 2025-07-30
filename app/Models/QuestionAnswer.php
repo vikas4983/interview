@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class QuestionAnswer extends Model
 {
-    protected $fillable  = ['question', 'uuid', 'answer', 'quote', 'code_block', 'heading', 'subject', 'language', 'status'];
+    protected $fillable  = ['question', 'uuid', 'answer', 'quote', 'code_block', 'heading', 'subject', 'language', 'status','like','dislike','ip','action'];
 
     public function scopeGetAll($query)
     {
@@ -20,6 +20,8 @@ class QuestionAnswer extends Model
     {
         return $query;
     }
-
+   public function likes(){
+    return $this->hasMany(LikeDislike::class, 'question_answer_id', 'id');
+   }
    
 }
