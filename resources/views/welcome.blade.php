@@ -36,7 +36,7 @@
                                             title="Like" style="color: green"></i></a></span>
                             @elseif($userAction->where('action', 'dislike')->where('question_answer_id', $data->id)->isNotEmpty())
                                 <span>{{ $data->dislike != 0 ? $data->dislike : '' }} <a
-                                        href="{{ route('like', $data->uuid) }}"><i class="mdi mdi-thumb-down mr-5"
+                                        href="{{ route('dislike', $data->uuid) }}"><i class="mdi mdi-thumb-down mr-5"
                                             title="Like" style="color: rgb(245, 5, 5)"></i></a></span>
                             @endif
                         </div>

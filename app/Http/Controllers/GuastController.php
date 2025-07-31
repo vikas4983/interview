@@ -48,7 +48,7 @@ class GuastController extends Controller
             $iqa->increment('like');
             return redirect()->back()->with('success', 'You have  liked');
         }
-               $like->delete();
+        $like->delete();
         if ($iqa->like > 0) {
             $iqa->decrement('like');
         }

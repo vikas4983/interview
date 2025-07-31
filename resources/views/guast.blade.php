@@ -29,7 +29,7 @@
                         <span>{{ $item->like != 0 ? $item->like : '' }} <a href="{{ route('like', $item->uuid) }}"><i
                                     class="mdi mdi-thumb-up mr-5" title="Like" style="color: green"></i></a></span>
                     @elseif($userAction->where('action', 'dislike')->where('question_answer_id', $item->id)->isNotEmpty())
-                        <span> {{ $item->dislike != 0 ? $item->dislike : '' }} <a href="{{ route('like', $item->uuid) }}"><i
+                        <span> {{ $item->dislike != 0 ? $item->dislike : '' }} <a href="{{ route('dislike', $item->uuid) }}"><i
                                     class="mdi mdi-thumb-down mr-5" title="Like"
                                     style="color: rgb(245, 5, 5)"></i></a></span>
                     @endif
