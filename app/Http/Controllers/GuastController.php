@@ -10,7 +10,10 @@ class GuastController extends Controller
 {
     public function home()
     {
-        $iqa = QuestionAnswer::with('likes')->latest('created_at')->paginate(6);
+        $ip = request()->ip();
+        $iqa = QuestionAnswer::with(['likes' => function ($q) use ($ip) {
+            $q->where('ip', $ip)->latest();
+        }])->latest()->paginate(6);
         return view('welcome', compact('iqa'));
     }
 
@@ -42,22 +45,12 @@ class GuastController extends Controller
                     'ip' => $ip,
                 ]
             );
-            if ($iqa) {
-                $iqa->update([
-                    'like' => intval($iqa->like) + 1,
-                ]);
-                return redirect()->back()->with('success', 'You have  liked');
-            }
+            $iqa->increment('like', 1);
+            return redirect()->back()->with('success', 'You have  liked');
         }
-
-        if (!empty($like && $iqa)) {
-            $like->destroy($like->id);
-            $iqa->update([
-                'like' => intval($iqa->like) - 1,
-            ]);
-            return redirect()->back()->with('success', 'You have cancel liked');
-        }
-        return redirect()->back()->with('error', 'Something went wrong');
+        $like->destroy($like->id);
+        $iqa->decrement('like', 1);
+        return redirect()->back()->with('success', 'You have cancel liked');
     }
     public function dislike(Request $request, $uuid)
     {
@@ -76,21 +69,11 @@ class GuastController extends Controller
                     'ip' => $ip,
                 ]
             );
-            if ($iqa) {
-                $iqa->update([
-                    'dislike' => intval($iqa->dislike) + 1,
-                ]);
-                return redirect()->back()->with('success', 'You have  disliked');
-            }
+            $iqa->increment('dislike', 1);
+            return redirect()->back()->with('success', 'You have  disliked');
         }
-
-        if (!empty($dislike && $iqa)) {
-            $dislike->destroy($dislike->id);
-            $iqa->update([
-                'dislike' => intval($iqa->dislike) - 1,
-            ]);
-            return redirect()->back()->with('success', 'You have cancel disliked');
-        }
-        return redirect()->back()->with('error', 'Something went wrong');
+        $dislike->destroy($dislike->id);
+        $iqa->decrement('dislike', 1);
+        return redirect()->back()->with('success', 'You have cancel disliked');
     }
 }

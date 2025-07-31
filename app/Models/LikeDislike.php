@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class LikeDislike extends Model
 {
-    protected $fillable = ['question_answer_id', 'action', 'ip'];
+    protected $fillable = ['question_answer_id', 'action', 'ip', 'like', 'deslike'];
 }
