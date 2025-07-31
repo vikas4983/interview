@@ -26,19 +26,16 @@
 
                             @endphp
                             @if ($userAction->isEmpty())
-                                <span> {{ $data->like != 0 ? $data->like : '' }}
-
-                                    <a href="{{ route('like', $data->uuid) }}"><i class="mdi mdi-thumb-up mr-5" title="Like"
-                                            style="color: green"></i></a></span>
-                                <span>{{ $data->dislike != 0 ? $data->dislike : '' }}
-                                    <a href="{{ route('dislike', $data->uuid) }}"><i class="mdi mdi-thumb-down mr-5"
+                                <span> {{ $data->like != 0 ? $data->like : '' }} <a href="{{ route('like', $data->uuid) }}">
+                                        <i class="mdi mdi-thumb-up mr-5" title="Like" style="color: green"></i></a></span>
+                                <span>{{ $data->dislike != 0 ? $data->dislike : '' }} <a href="{{ route('dislike', $data->uuid) }}"><i class="mdi mdi-thumb-down mr-5"
                                             title="Dislike" style="color: rgb(225, 11, 11)"></i></a></span>
                             @elseif($userAction->where('action', 'like')->where('question_answer_id', $data->id)->isNotEmpty())
-                                <span> {{ $data->like != 0 ? $data->like : '' }}<a
+                                <span> {{ $data->like != 0 ? $data->like : '' }} <a
                                         href="{{ route('like', $data->uuid) }}"><i class="mdi mdi-thumb-up mr-5"
                                             title="Like" style="color: green"></i></a></span>
                             @elseif($userAction->where('action', 'dislike')->where('question_answer_id', $data->id)->isNotEmpty())
-                                <span>{{ $data->like != 0 ? $data->like : '' }} <a
+                                <span>{{ $data->dislike != 0 ? $data->dislike : '' }} <a
                                         href="{{ route('like', $data->uuid) }}"><i class="mdi mdi-thumb-down mr-5"
                                             title="Like" style="color: rgb(245, 5, 5)"></i></a></span>
                             @endif
