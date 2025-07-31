@@ -45,11 +45,13 @@ class GuastController extends Controller
                     'ip' => $ip,
                 ]
             );
-            $iqa->increment('like', 1);
+            $iqa->increment('like');
             return redirect()->back()->with('success', 'You have  liked');
         }
-        $like->destroy($like->id);
-        $iqa->decrement('like', 1);
+               $like->delete();
+        if ($iqa->like > 0) {
+            $iqa->decrement('like');
+        }
         return redirect()->back()->with('success', 'You have cancel liked');
     }
     public function dislike(Request $request, $uuid)
@@ -69,11 +71,13 @@ class GuastController extends Controller
                     'ip' => $ip,
                 ]
             );
-            $iqa->increment('dislike', 1);
+            $iqa->increment('dislike');
             return redirect()->back()->with('success', 'You have  disliked');
         }
-        $dislike->destroy($dislike->id);
-        $iqa->decrement('dislike', 1);
+        $dislike->delete();
+        if ($iqa->dislike > 0) {
+            $iqa->decrement('dislike');
+        }
         return redirect()->back()->with('success', 'You have cancel disliked');
     }
 }
