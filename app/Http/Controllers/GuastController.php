@@ -36,7 +36,7 @@ class GuastController extends Controller
         if (!$iqa) {
             return redirect()->back()->with('error', 'Something went wrong');
         }
-        $like = LikeDislike::where('question_answer_id', $iqa->id)->where('ip', $ip)->first();
+        $like = LikeDislike::where('question_answer_id', $iqa->id)->where('ip', $ip)->where('action', 'like')->first();
         if (!$like) {
             LikeDislike::create(
                 [
@@ -60,7 +60,7 @@ class GuastController extends Controller
         if (!$iqa) {
             return redirect()->back()->with('error', 'Something went wrong');
         }
-        $dislike = LikeDislike::where('question_answer_id', $iqa->id)->where('ip', $ip)->first();
+        $dislike = LikeDislike::where('question_answer_id', $iqa->id)->where('ip', $ip)->where('action', 'dislike')->first();
         if (!$dislike) {
             LikeDislike::create(
                 [
